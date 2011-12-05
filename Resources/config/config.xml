@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <!-- Mailers -->
+        <parameter key="hb_stampie.mailer.send_grid.class">Stampie\Mailer\SendGrid</parameter>
+        <parameter key="hb_stampie.mailer.mail_chimp.class">Stampie\Mailer\MailChimpSts</parameter>
+        <parameter key="hb_stampie.mailer.postmark.class">Stampie\Mailer\Postmark</parameter>
+
+        <!-- Adapters -->
+        <parameter key="hb_stampie.adapter.buzz.class">Stampie\Adapter\Buzz</parameter>
+    </parameters>
+
+    <services>
+        <!-- Adapters -->
+        <service id="hb_stampie.adapter.buzz" class="%hb_stampie.adapter.buzz.class%">
+            <argument type="service" id="buzz" />
+        </service>
+
+        <!--
+            Mailers:
+                Theese are abstract because the Extension will create a hb_stampie.mailer service
+                where an adapter and ServerToken are set instead
+        -->
+        <service id="hb_stampie.mailer.send_grid" class="%hb_stampie.mailer.send_grid.class%" abstract="false" />
+        <service id="hb_stampie.mailer.mail_chimp" class="%hb_stampie.mailer.mail_chimp.class%" abstract="false" />
+        <service id="hb_stampie.mailer.postmark" class="%hb_stampie.mailer.postmark.class%" abstract="false" />
+    </services>
+</container>
