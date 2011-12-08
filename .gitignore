@@ -1,3 +1,4 @@
 composer.lock
 coverage
+vendor
 phpunit.xml
