@@ -1,6 +1,6 @@
 {
     "name": "henrikbjorn/stampie-bundle",
-    "description": "This bundle provides integration for Stampie",
+    "description": "This bundle provides integration for Stampie Email Library",
     "keywords": ["symfony2", "stampie", "email"],
     "type": "symfony-bundle",
     "license": "MIT",
