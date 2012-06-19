@@ -14,6 +14,7 @@
 
         <!-- Adapters -->
         <parameter key="hb_stampie.adapter.buzz.class">Stampie\Adapter\Buzz</parameter>
+        <parameter key="hb_stampie.adapter.noop.class">Stampie\Adapter\NoopAdapter</parameter>
     </parameters>
 
     <services>
@@ -21,6 +22,8 @@
         <service id="hb_stampie.adapter.buzz" class="%hb_stampie.adapter.buzz.class%">
             <argument type="service" id="buzz" />
         </service>
+
+        <service id="hb_stampie.adapter.noop" class="%hb_stampie.adapter.noop.class%" />
 
         <!--
             Mailers:
