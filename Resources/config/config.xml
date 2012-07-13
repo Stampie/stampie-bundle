@@ -27,7 +27,7 @@
 
         <!--
             Mailers:
-                Theese are abstract because the Extension will create a hb_stampie.mailer service
+                These are abstract because the Extension will create a hb_stampie.mailer service
                 where an adapter and ServerToken are set instead
         -->
         <service id="hb_stampie.mailer.send_grid" class="%hb_stampie.mailer.send_grid.class%" abstract="true" />

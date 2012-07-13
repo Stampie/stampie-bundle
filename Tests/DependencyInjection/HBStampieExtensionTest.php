@@ -51,14 +51,17 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
             ),
         ), $builder);
 
-        $this->assertTrue($builder->hasDefinition('hb_stampie.mailer'));
-        $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer'));
-        $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer')->getParent());
+        $this->assertTrue($builder->hasAlias('hb_stampie.mailer'));
+        $this->assertEquals('hb_stampie.mailer.real', (string) $builder->getAlias('hb_stampie.mailer'));
+
+        $this->assertTrue($builder->hasDefinition('hb_stampie.mailer.real'));
+        $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer.real'));
+        $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer.real')->getParent());
 
         $this->assertEquals(array(
             $builder->getDefinition('hb_stampie.adapter.buzz'),
             'token',
-        ), $builder->getDefinition('hb_stampie.mailer')->getArguments()); 
+        ), $builder->getDefinition('hb_stampie.mailer.real')->getArguments());
     }
 
     public function testAlias()

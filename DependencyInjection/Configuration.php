@@ -29,6 +29,11 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('mailer')->isRequired()->end()
                 ->scalarNode('server_token')->isRequired()->end()
                 ->scalarNode('adapter')->isRequired()->end()
+                ->arrayNode('extra')
+                    ->children()
+                        ->scalarNode('delivery_address')->defaultNull()->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
