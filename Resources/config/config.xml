@@ -11,6 +11,7 @@
         <parameter key="hb_stampie.mailer.mail_chimp.class">Stampie\Mailer\MailChimpSts</parameter>
         <parameter key="hb_stampie.mailer.postmark.class">Stampie\Mailer\Postmark</parameter>
         <parameter key="hb_stampie.mailer.mailgun.class">Stampie\Mailer\MailGun</parameter>
+        <parameter key="hb_stampie.mailer.mandrill.class">Stampie\Mailer\Mandrill</parameter>
 
         <!-- Adapters -->
         <parameter key="hb_stampie.adapter.buzz.class">Stampie\Adapter\Buzz</parameter>
@@ -34,5 +35,6 @@
         <service id="hb_stampie.mailer.mail_chimp" class="%hb_stampie.mailer.mail_chimp.class%" abstract="true" />
         <service id="hb_stampie.mailer.postmark" class="%hb_stampie.mailer.postmark.class%" abstract="true" />
         <service id="hb_stampie.mailer.mailgun" class="%hb_stampie.mailer.mailgun.class%" abstract="true" />
+        <service id="hb_stampie.mailer.mandrill" class="%hb_stampie.mailer.mandrill.class%" abstract="true" />
     </services>
 </container>
