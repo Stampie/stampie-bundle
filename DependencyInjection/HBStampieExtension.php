@@ -43,16 +43,41 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
 
         // get the abstract definition of an mailer and create "hb_stampie" based on it
         $container
-            ->setDefinition('hb_stampie.mailer', new DefinitionDecorator($mailerServiceId))
+            ->setDefinition('hb_stampie.mailer.real', new DefinitionDecorator($mailerServiceId))
+            ->setPublic(false)
             ->setArguments(array(
                 $container->getDefinition($adapterServiceId),
                 $config['server_token'],
             ))
         ;
+        $mailerId = 'hb_stampie.mailer.real';
+
+        if (isset($config['extra'])) {
+            $this->loadExtra($config['extra'], $container, $loader);
+
+            $mailerId = 'hb_stampie.extra.mailer';
+        }
+
+        $container->setAlias('hb_stampie.mailer', $mailerId);
     }
 
     public function getAlias()
     {
         return 'hb_stampie';
+    }
+
+    private function loadExtra(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        if (!class_exists('Stampie\Extra\Mailer')) {
+            throw new \InvalidArgumentException('You cannot activate the extra feature without the StampieExtra library');
+        }
+
+        $loader->load('extra.xml');
+
+        if (!empty($config['delivery_address'])) {
+            $container->getDefinition('hb_stampie.extra.listener.impersonate')
+                ->setAbstract(false)
+                ->replaceArgument(0, $config['delivery_address']);
+        }
     }
 }
