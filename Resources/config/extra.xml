@@ -7,9 +7,11 @@
 
     <parameters>
         <parameter key="hb_stampie.extra.mailer.class">Stampie\Extra\Mailer</parameter>
+        <parameter key="hb_stampie.data_collector.class">HB\StampieBundle\DataCollector\StampieDataCollector</parameter>
 
         <!-- Listeners -->
         <parameter key="hb_stampie.extra.listener.impersonate.class">Stampie\Extra\EventListener\ImpersonateListener</parameter>
+        <parameter key="hb_stampie.listener.message_logger.class">HB\StampieBundle\EventListener\MessageLogger</parameter>
 
     </parameters>
 
@@ -17,6 +19,11 @@
         <service id="hb_stampie.extra.mailer" class="%hb_stampie.extra.mailer.class%" public="false">
             <argument type="service" id="hb_stampie.mailer.real" />
             <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="hb_stampie.data_collector" class="%hb_stampie.data_collector.class%" public="false">
+            <argument type="service" id="hb_stampie.listener.message_logger" on-invalid="ignore" />
+            <tag name="data_collector" id="stampie" template="HBStampieBundle:Collector:messages.html.twig"/>
         </service>
 
         <!--
@@ -28,6 +35,11 @@
             <!-- TODO switch to the kernel.event_subscriber tag when dropping the 2.0 support. -->
             <tag name="kernel.event_listener" event="stampie.pre_send" method="preSend" />
             <argument /><!-- delivery address -->
+        </service>
+
+        <service id="hb_stampie.listener.message_logger" class="%hb_stampie.listener.message_logger.class%">
+            <!-- TODO switch to the kernel.event_subscriber tag when dropping the 2.0 support. -->
+            <tag name="kernel.event_listener" event="stampie.pre_send" method="preSend" />
         </service>
     </services>
 </container>
