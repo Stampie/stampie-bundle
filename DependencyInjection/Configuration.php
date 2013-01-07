@@ -19,6 +19,16 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    private $debug;
+
+    /**
+     * @param Boolean $debug The kernel.debug value
+     */
+    public function __construct($debug)
+    {
+        $this->debug = (Boolean) $debug;
+    }
+
     public function getConfigTreeBuilder()
     {
         $builder = new TreeBuilder();
@@ -32,6 +42,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('extra')
                     ->children()
                         ->scalarNode('delivery_address')->defaultNull()->end()
+                        ->scalarNode('logging')->defaultValue($this->debug)->end()
                     ->end()
                 ->end()
             ->end()
