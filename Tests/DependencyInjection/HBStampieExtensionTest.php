@@ -4,6 +4,7 @@ namespace HB\StampieBundle\Tests\DependencyInjection;
 
 use HB\StampieBundle\DependencyInjection\HBStampieExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
@@ -24,7 +25,7 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
                 'mailer' => 'DummyMailer',
                 'server_token' => 'token',
             ),
-        ), new ContainerBuilder());
+        ), $this->createContainerBuilder());
     }
 
     public function testExceptionWhenInvalidMailerSpecified()
@@ -36,12 +37,12 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
                 'mailer' => 'DummyMailer',
                 'server_token' => 'token',
             ),
-        ), new ContainerBuilder());
+        ), $this->createContainerBuilder());
     }
 
     public function testHBStampieMailerDefinitionIsBuilt()
     {
-        $builder = new ContainerBuilder();
+        $builder = $this->createContainerBuilder();
 
         $this->extension->load(array(
             'hb_stampie' => array(
@@ -67,5 +68,31 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
     public function testAlias()
     {
         $this->assertEquals('hb_stampie', $this->extension->getAlias());
+    }
+
+    public function testExtraLogging()
+    {
+        $builder = $this->createContainerBuilder();
+
+        $this->extension->load(array(
+            'hb_stampie' => array(
+                'adapter' => 'buzz',
+                'mailer' => 'postmark',
+                'server_token' => 'token',
+                'extra' => array(
+                    'logging' => true,
+                ),
+            ),
+        ), $builder);
+
+        $this->assertTrue($builder->hasDefinition('hb_stampie.listener.message_logger'));
+        $this->assertTrue($builder->hasDefinition('hb_stampie.data_collector'));
+    }
+
+    protected function createContainerBuilder($kernelDebug = false)
+    {
+        return new ContainerBuilder(new ParameterBag(array(
+            'kernel.debug' => $kernelDebug,
+        )));
     }
 }

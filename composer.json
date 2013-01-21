@@ -13,6 +13,9 @@
         "symfony/framework-bundle" : ">=2.0,<2.2-dev",
         "henrikbjorn/stampie"      : "*"
     },
+    "require-dev": {
+        "stof/stampie-extra": "dev-master"
+    },
     "suggest": {
         "stof/stampie-extra": "to have event-based hooks in the mailer"
     },

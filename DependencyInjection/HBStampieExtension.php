@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
@@ -28,7 +29,7 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
         $loader->load('config.xml');
 
         $processor = new Processor();
-        $config    = $processor->processConfiguration(new Configuration(), $configs);
+        $config    = $processor->processConfiguration(new Configuration($container->getParameter('kernel.debug')), $configs);
 
         $adapterServiceId = sprintf('hb_stampie.adapter.%s', $config['adapter']);
         $mailerServiceId  = sprintf("hb_stampie.mailer.%s", $config['mailer']);
@@ -78,6 +79,10 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
             $container->getDefinition('hb_stampie.extra.listener.impersonate')
                 ->setAbstract(false)
                 ->replaceArgument(0, $config['delivery_address']);
+        }
+
+        if (!$config['logging']) {
+            $container->removeDefinition('hb_stampie.listener.message_logger');
         }
     }
 }
