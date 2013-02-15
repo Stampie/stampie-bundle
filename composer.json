@@ -10,11 +10,11 @@
     }],
     "require": {
         "php"                      : ">=5.3.3",
-        "symfony/framework-bundle" : ">=2.0,<2.2-dev",
-        "henrikbjorn/stampie"      : "*"
+        "symfony/framework-bundle" : ">=2.0,<2.3-dev",
+        "henrikbjorn/stampie"      : "~0.6"
     },
     "require-dev": {
-        "stof/stampie-extra": "dev-master"
+        "stof/stampie-extra": "~0.2"
     },
     "suggest": {
         "stof/stampie-extra": "to have event-based hooks in the mailer"
@@ -24,5 +24,10 @@
             "HB\\StampieBundle\\": ""
         }
     },
-    "target-dir" : "HB/StampieBundle"
+    "target-dir" : "HB/StampieBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
 }
