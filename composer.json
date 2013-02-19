@@ -14,7 +14,7 @@
         "henrikbjorn/stampie"      : "~0.6"
     },
     "require-dev": {
-        "stof/stampie-extra": "~0.2"
+        "stof/stampie-extra": "~0.2@dev"
     },
     "suggest": {
         "stof/stampie-extra": "to have event-based hooks in the mailer"
