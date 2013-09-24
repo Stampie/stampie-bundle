@@ -28,10 +28,9 @@
 
         <!--
             Listeners:
-                These are abstract so that they are removed when they should not be activated.
-                 The DI extension will change them when activating them.
+                These are removed by the DI extension when they should not be activated.
         -->
-        <service id="hb_stampie.extra.listener.impersonate" class="%hb_stampie.extra.listener.impersonate.class%" abstract="true">
+        <service id="hb_stampie.extra.listener.impersonate" class="%hb_stampie.extra.listener.impersonate.class%">
             <!-- TODO switch to the kernel.event_subscriber tag when dropping the 2.0 support. -->
             <tag name="kernel.event_listener" event="stampie.pre_send" method="preSend" />
             <argument /><!-- delivery address -->

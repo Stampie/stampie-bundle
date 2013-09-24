@@ -77,8 +77,9 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
 
         if (!empty($config['delivery_address'])) {
             $container->getDefinition('hb_stampie.extra.listener.impersonate')
-                ->setAbstract(false)
                 ->replaceArgument(0, $config['delivery_address']);
+        } else {
+            $container->removeDefinition('hb_stampie.extra.listener.impersonate');
         }
 
         if (!$config['logging']) {
