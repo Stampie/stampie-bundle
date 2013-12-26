@@ -10,7 +10,7 @@
     }],
     "require": {
         "php"                      : ">=5.3.3",
-        "symfony/framework-bundle" : ">=2.0,<2.4",
+        "symfony/framework-bundle" : "~2.0",
         "henrikbjorn/stampie"      : "~0.6"
     },
     "require-dev": {
