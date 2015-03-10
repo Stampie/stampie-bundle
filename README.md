@@ -12,13 +12,16 @@ Add the configuration to `config.yml` as follows
 
 ``` yaml
 hb_stampie:
-    adapter: buzz # buzz and noop are supported
+    adapter: buzz # buzz, guzzle and noop are supported
     mailer: postmark # [send_grid, mail_chimp, postmark] is supported
     server_token: POSTMARK_API_TEST # Replace with your ServerToken for you Service
 ```
 
 For the `buzz` adapter to work it is required to have a `buzz` service fortunately [SensioBuzzBundle](http://github.com/sensio/SensioBuzzBundle)
 provides this.
+
+If you want to use the `guzzle` adapter, the [MisdGuzzleBundle](https://github.com/misd-service-development/guzzle-bundle) provides
+the required dependencies.
 
 ## StampieExtra
 
