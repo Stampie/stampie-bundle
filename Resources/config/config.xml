@@ -15,13 +15,19 @@
 
         <!-- Adapters -->
         <parameter key="hb_stampie.adapter.buzz.class">Stampie\Adapter\Buzz</parameter>
+        <parameter key="hb_stampie.adapter.guzzle.class">Stampie\Adapter\Guzzle</parameter>
         <parameter key="hb_stampie.adapter.noop.class">Stampie\Adapter\NoopAdapter</parameter>
     </parameters>
 
     <services>
+
         <!-- Adapters -->
         <service id="hb_stampie.adapter.buzz" class="%hb_stampie.adapter.buzz.class%">
-            <argument type="service" id="buzz" />
+            <argument><!-- Injected in AdapterCompilerPass --></argument>
+        </service>
+
+        <service id="hb_stampie.adapter.guzzle" class="%hb_stampie.adapter.guzzle.class%">
+            <argument><!-- Injected in AdapterCompilerPass --></argument>
         </service>
 
         <service id="hb_stampie.adapter.noop" class="%hb_stampie.adapter.noop.class%" />
