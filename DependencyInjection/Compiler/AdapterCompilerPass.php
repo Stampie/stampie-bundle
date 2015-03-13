@@ -44,7 +44,7 @@ class AdapterCompilerPass implements CompilerPassInterface
         foreach ($adapterMapping as $serviceId => $adapterId) {
             if ($container->has($serviceId)) {
                 $container->getDefinition($adapterId)
-                    ->addArgument(new Reference($serviceId));
+                    ->replaceArgument(0, new Reference($serviceId));
             }
         }
     }
