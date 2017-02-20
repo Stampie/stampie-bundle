@@ -11,6 +11,8 @@
 
 namespace HB\StampieBundle\Command;
 
+use Stampie\IdentityInterface;
+
 /**
  * Class TestMessage
  * @package HB\StampieBundle\Command
