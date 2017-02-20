@@ -11,7 +11,10 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
  */
 class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    /** @var HBStampieExtension */
+    private $extension;
+
+    protected function setUp()
     {
         $this->extension = new HBStampieExtension();
     }

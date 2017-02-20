@@ -12,6 +12,7 @@
 namespace HB\StampieBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -25,7 +26,7 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new Filelocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('config.xml');
 
         $processor = new Processor();
@@ -42,15 +43,23 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
             throw new \InvalidArgumentException(sprintf('Invalid mailer "%s" specified', $config['mailer']));
         }
 
+        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+            $definition = new ChildDefinition($mailerServiceId);
+        } else {
+            $definition = new DefinitionDecorator($mailerServiceId);
+        }
+
         // get the abstract definition of an mailer and create "hb_stampie" based on it
-        $container
-            ->setDefinition('hb_stampie.mailer.real', new DefinitionDecorator($mailerServiceId))
+        $definition
             ->setPublic(false)
             ->setArguments(array(
                 $container->getDefinition($adapterServiceId),
                 $config['server_token'],
             ))
         ;
+
+        $container->setDefinition('hb_stampie.mailer.real', $definition);
+
         $mailerId = 'hb_stampie.mailer.real';
 
         if (isset($config['extra'])) {
