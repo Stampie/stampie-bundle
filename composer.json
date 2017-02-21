@@ -1,7 +1,7 @@
 {
     "name": "henrikbjorn/stampie-bundle",
     "description": "This bundle provides integration for Stampie Email Library",
-    "keywords": ["symfony2", "stampie", "email"],
+    "keywords": ["symfony", "stampie", "email"],
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [{
@@ -10,12 +10,13 @@
     }],
     "require": {
         "php"                      : ">=5.3.3",
-        "symfony/framework-bundle" : "~2.0",
-        "symfony/console"          : "~2.0",
-        "henrikbjorn/stampie"      : "~0.6"
+        "symfony/framework-bundle" : "^2.7 || ^3.0",
+        "symfony/console"          : "^2.7 || ^3.0",
+        "henrikbjorn/stampie"      : "~0.11"
     },
     "require-dev": {
-        "stof/stampie-extra": "~0.2@dev"
+        "stof/stampie-extra": "~0.2@dev",
+        "symfony/phpunit-bridge": "^3.2"
     },
     "suggest": {
         "stof/stampie-extra": "to have event-based hooks in the mailer"

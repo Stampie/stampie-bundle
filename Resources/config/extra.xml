@@ -31,14 +31,12 @@
                 These are removed by the DI extension when they should not be activated.
         -->
         <service id="hb_stampie.extra.listener.impersonate" class="%hb_stampie.extra.listener.impersonate.class%">
-            <!-- TODO switch to the kernel.event_subscriber tag when dropping the 2.0 support. -->
-            <tag name="kernel.event_listener" event="stampie.pre_send" method="preSend" />
+            <tag name="kernel.event_subscriber" />
             <argument /><!-- delivery address -->
         </service>
 
         <service id="hb_stampie.listener.message_logger" class="%hb_stampie.listener.message_logger.class%">
-            <!-- TODO switch to the kernel.event_subscriber tag when dropping the 2.0 support. -->
-            <tag name="kernel.event_listener" event="stampie.pre_send" method="preSend" />
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>
