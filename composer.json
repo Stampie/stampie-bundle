@@ -21,11 +21,10 @@
         "stof/stampie-extra": "to have event-based hooks in the mailer"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "HB\\StampieBundle\\": ""
         }
     },
-    "target-dir" : "HB/StampieBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
