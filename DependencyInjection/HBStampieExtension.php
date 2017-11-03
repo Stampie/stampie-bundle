@@ -32,12 +32,11 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
         $processor = new Processor();
         $config    = $processor->processConfiguration(new Configuration($container->getParameter('kernel.debug')), $configs);
 
-        $adapterServiceId = sprintf('hb_stampie.adapter.%s', $config['adapter']);
-        $mailerServiceId  = sprintf("hb_stampie.mailer.%s", $config['mailer']);
 
-        if (!$container->has($adapterServiceId)) {
-            throw new \InvalidArgumentException(sprintf('Invalid adapter "%s" specified', $config['adapter']));
-        }
+        $bundles = $container->getParameter('kernel.bundles');
+        $loader->load(isset($bundles['HttplugBundle']) ? 'httplug-bundle.xml' : 'httplug.xml');
+
+        $mailerServiceId  = sprintf("hb_stampie.mailer.%s", $config['mailer']);
 
         if (!$container->has($mailerServiceId)) {
             throw new \InvalidArgumentException(sprintf('Invalid mailer "%s" specified', $config['mailer']));
@@ -53,7 +52,7 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
         $definition
             ->setPublic(false)
             ->setArguments(array(
-                $container->getDefinition($adapterServiceId),
+                new Reference($config['http_client']),
                 $config['server_token'],
             ))
         ;

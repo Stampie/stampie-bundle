@@ -8,14 +8,22 @@
         "name" : "Henrik Bjørnskov",
         "email" : "henrik@bjrnskov.dk"
     }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/fbourigault/StampieExtra"
+        }
+    ],
     "require": {
-        "php"                      : ">=5.3.3",
-        "symfony/framework-bundle" : "^2.7 || ^3.0",
-        "symfony/console"          : "^2.7 || ^3.0",
-        "henrikbjorn/stampie"      : "~0.11"
+        "php": ">=5.3.3",
+        "stampie/stampie": "^1.0",
+        "symfony/console": "^2.7 || ^3.0",
+        "symfony/framework-bundle": "^2.7 || ^3.0"
     },
     "require-dev": {
-        "stof/stampie-extra": "~0.2@dev",
+        "stof/stampie-extra": "dev-feature/httplug",
         "symfony/phpunit-bridge": "^3.2"
     },
     "suggest": {

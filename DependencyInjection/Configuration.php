@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('mailer')->isRequired()->end()
                 ->scalarNode('server_token')->isRequired()->end()
-                ->scalarNode('adapter')->isRequired()->end()
+                ->scalarNode('http_client')->defaultValue('hb_stampie.http_client')->end()
                 ->arrayNode('extra')
                     ->children()
                         ->scalarNode('delivery_address')->defaultNull()->end()
