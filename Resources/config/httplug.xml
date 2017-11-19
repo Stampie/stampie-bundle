@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="hb_stampie.http_client" class="Http\Client\HttpClient" public="false">
-            <factory class="Http\Client\Discovery\HttpClientDiscovery" method="find" />
+            <factory class="Http\Discovery\HttpClientDiscovery" method="find" />
         </service>
     </services>
 </container>
