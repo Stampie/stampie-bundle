@@ -10,12 +10,6 @@
     }],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/fbourigault/StampieExtra"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "stampie/stampie": "^1.0",
@@ -23,11 +17,11 @@
         "symfony/framework-bundle": "^2.7 || ^3.0"
     },
     "require-dev": {
-        "stof/stampie-extra": "dev-feature/httplug",
+        "stampie/extra": "^1.0",
         "symfony/phpunit-bridge": "^3.2"
     },
     "suggest": {
-        "stof/stampie-extra": "to have event-based hooks in the mailer"
+        "stampie/extra": "to have event-based hooks in the mailer"
     },
     "autoload": {
         "psr-4": {
