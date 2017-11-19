@@ -17,6 +17,8 @@
         "symfony/framework-bundle": "^2.7 || ^3.0"
     },
     "require-dev": {
+        "guzzlehttp/psr7": "^1.4",
+        "php-http/curl-client": "^1.7",
         "stampie/extra": "^1.0",
         "symfony/phpunit-bridge": "^3.2"
     },
