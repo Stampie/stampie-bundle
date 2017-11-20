@@ -20,9 +20,12 @@ class HBStampieExtensionTest extends TestCase
         $this->extension = new HBStampieExtension();
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid adapter "DummyAdapter" specified
+     */
     public function testExceptionWhenInvalidAdapterSpecified()
     {
-        $this->setExpectedException('InvalidArgumentException', 'Invalid adapter "DummyAdapter" specified');
         $this->extension->load(array(
             'hb_stampie' => array(
                 'adapter' => 'DummyAdapter',
@@ -32,9 +35,12 @@ class HBStampieExtensionTest extends TestCase
         ), $this->createContainerBuilder());
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid mailer "DummyMailer" specified
+     */
     public function testExceptionWhenInvalidMailerSpecified()
     {
-        $this->setExpectedException('InvalidArgumentException', 'Invalid mailer "DummyMailer" specified');
         $this->extension->load(array(
             'hb_stampie' => array(
                 'adapter' => 'buzz',
