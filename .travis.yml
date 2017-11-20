@@ -32,3 +32,5 @@ before_install:
     - if [ "$DEPENDENCIES" = "dev" ]; then perl -pi -e 's/^}$/,"minimum-stability":"dev"}/' composer.json; fi;
 
 install: composer update --prefer-dist $COMPOSER_FLAGS
+
+script: vendor/bin/simple-phpunit

@@ -3,13 +3,14 @@
 namespace HB\StampieBundle\Tests\DependencyInjection;
 
 use HB\StampieBundle\DependencyInjection\HBStampieExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
+class HBStampieExtensionTest extends TestCase
 {
     /** @var HBStampieExtension */
     private $extension;
