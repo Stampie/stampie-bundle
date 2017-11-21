@@ -66,7 +66,11 @@ class HBStampieExtensionTest extends TestCase
         $this->assertEquals('hb_stampie.mailer.real', (string) $builder->getAlias('hb_stampie.mailer'));
 
         $this->assertTrue($builder->hasDefinition('hb_stampie.mailer.real'));
-        $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer.real'));
+        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('hb_stampie.mailer.real'));
+        } else {
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer.real'));
+        }
         $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer.real')->getParent());
 
         $this->assertEquals(array(
