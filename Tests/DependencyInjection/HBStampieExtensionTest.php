@@ -3,13 +3,14 @@
 namespace HB\StampieBundle\Tests\DependencyInjection;
 
 use HB\StampieBundle\DependencyInjection\HBStampieExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
+class HBStampieExtensionTest extends TestCase
 {
     /** @var HBStampieExtension */
     private $extension;
@@ -19,9 +20,12 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
         $this->extension = new HBStampieExtension();
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid adapter "DummyAdapter" specified
+     */
     public function testExceptionWhenInvalidAdapterSpecified()
     {
-        $this->setExpectedException('InvalidArgumentException', 'Invalid adapter "DummyAdapter" specified');
         $this->extension->load(array(
             'hb_stampie' => array(
                 'adapter' => 'DummyAdapter',
@@ -31,9 +35,12 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
         ), $this->createContainerBuilder());
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid mailer "DummyMailer" specified
+     */
     public function testExceptionWhenInvalidMailerSpecified()
     {
-        $this->setExpectedException('InvalidArgumentException', 'Invalid mailer "DummyMailer" specified');
         $this->extension->load(array(
             'hb_stampie' => array(
                 'adapter' => 'buzz',
@@ -59,7 +66,11 @@ class HBStampieExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('hb_stampie.mailer.real', (string) $builder->getAlias('hb_stampie.mailer'));
 
         $this->assertTrue($builder->hasDefinition('hb_stampie.mailer.real'));
-        $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer.real'));
+        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('hb_stampie.mailer.real'));
+        } else {
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer.real'));
+        }
         $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer.real')->getParent());
 
         $this->assertEquals(array(
