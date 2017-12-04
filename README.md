@@ -1,8 +1,8 @@
 # HBStampieBundle
 
-[![Build Status](https://secure.travis-ci.org/henrikbjorn/HBStampieBundle.png)](http://travis-ci.org/henrikbjorn/HBStampieBundle)
+[![Build Status](https://api.travis-ci.org/Stampie/HBStampieBundle.png)](https://travis-ci.org/Stampie/HBStampieBundle)
 
-Integrates [Stampie](http://github.com/henrikbjorn/Stampie) with Symfony2.
+Integrates [Stampie](https://github.com/Stampie/Stampie) with Symfony.
 
 ## Usage
 
