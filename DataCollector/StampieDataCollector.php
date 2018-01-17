@@ -49,6 +49,14 @@ class StampieDataCollector extends DataCollector
         return $this->data['messages'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function reset()
+    {
+        $this->data = [];
+    }
+
     protected static function normalizeMessage(MessageInterface $message)
     {
         $normalizedMessage = array(
