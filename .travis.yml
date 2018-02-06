@@ -7,7 +7,7 @@ cache:
 
 env:
     global:
-        - PHPUNIT_FLAGS="-v"
+        - PHPUNIT_FLAGS=""
         - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
 
 matrix:
@@ -15,6 +15,8 @@ matrix:
     include:
           # Minimum supported Symfony version with the latest PHP version
         - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
+        - php: 5.4
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
 
           # Test the latest stable release
@@ -24,7 +26,7 @@ matrix:
         - php: 7.0
         - php: 7.1
         - php: 7.2
-          env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
+          env: COVERAGE=true PHPUNIT_FLAGS="--coverage-text"
 
           # Test LTS versions. This makes sure we do not use Symfony packages with version greater
           # than 2 or 3 respectively. Read more at https://github.com/symfony/lts
@@ -56,4 +58,4 @@ install:
 
 script:
     - composer validate --strict --no-check-lock
-    - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS
+    - ./vendor/bin/simple-phpunit -v $PHPUNIT_FLAGS
