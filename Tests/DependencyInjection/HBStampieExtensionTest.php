@@ -21,38 +21,6 @@ class HBStampieExtensionTest extends TestCase
         $this->extension = new HBStampieExtension();
     }
 
-    public function testWithHttplugBundle()
-    {
-        $container = $this->createContainerBuilder(false, array(
-            'HttplugBundle' => array(
-            ),
-        ));
-
-        $this->extension->load(array(
-            'hb_stampie' => array(
-                'mailer' => 'mail_chimp',
-                'server_token' => 'token',
-            ),
-        ), $container);
-
-        $this->assertTrue($container->hasAlias('hb_stampie.http_client'));
-        $this->assertEquals('httplug.client.default', (string) $container->getAlias('hb_stampie.http_client'));
-    }
-
-    public function testWithoutHttplugBundle()
-    {
-        $container = $this->createContainerBuilder();
-
-        $this->extension->load(array(
-            'hb_stampie' => array(
-                'mailer' => 'mail_chimp',
-                'server_token' => 'token',
-            ),
-        ), $container);
-
-        $this->assertTrue($container->hasDefinition('hb_stampie.http_client'));
-    }
-
     public function testWithCustomHttpClient()
     {
         $container = $this->createContainerBuilder();
@@ -106,7 +74,7 @@ class HBStampieExtensionTest extends TestCase
         $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer.real')->getParent());
 
         $this->assertEquals(array(
-            new Reference('hb_stampie.http_client'),
+            new Reference('httplug.client'),
             'token',
         ), $builder->getDefinition('hb_stampie.mailer.real')->getArguments());
     }

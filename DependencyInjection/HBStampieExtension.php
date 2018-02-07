@@ -32,10 +32,6 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
         $processor = new Processor();
         $config    = $processor->processConfiguration(new Configuration($container->getParameter('kernel.debug')), $configs);
 
-
-        $bundles = $container->getParameter('kernel.bundles');
-        $loader->load(isset($bundles['HttplugBundle']) ? 'httplug-bundle.xml' : 'httplug.xml');
-
         $mailerServiceId  = sprintf("hb_stampie.mailer.%s", $config['mailer']);
 
         if (!$container->has($mailerServiceId)) {
