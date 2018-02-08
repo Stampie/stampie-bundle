@@ -16,11 +16,10 @@ matrix:
           # Minimum supported Symfony version with the latest PHP version
         - php: 7.2
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
-        - php: 5.4
+        - php: 5.5
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
 
           # Test the latest stable release
-        - php: 5.4
         - php: 5.5
         - php: 5.6
         - php: 7.0
