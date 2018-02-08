@@ -25,7 +25,7 @@ class StampieDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $messages = array();
+        $messages = [];
 
         if (null !== $this->messageLogger) {
             foreach ($this->messageLogger->getMessages() as $message) {
@@ -59,22 +59,22 @@ class StampieDataCollector extends DataCollector
 
     protected static function normalizeMessage(MessageInterface $message)
     {
-        $normalizedMessage = array(
-            'from' => static::normalizeIdentity($message->getFrom()),
-            'to' => static::normalizeIdentity($message->getTo()),
-            'cc' => static::normalizeIdentity($message->getCc()),
-            'bcc' => static::normalizeIdentity($message->getBcc()),
-            'replyTo' => static::normalizeIdentity($message->getReplyTo()),
-            'fromRendered' => IdentityUtils::buildIdentityString($message->getFrom()),
-            'toRendered' => IdentityUtils::buildIdentityString($message->getTo()),
-            'ccRendered' => IdentityUtils::buildIdentityString($message->getCc()),
-            'bccRendered' => IdentityUtils::buildIdentityString($message->getBcc()),
+        $normalizedMessage = [
+            'from'            => static::normalizeIdentity($message->getFrom()),
+            'to'              => static::normalizeIdentity($message->getTo()),
+            'cc'              => static::normalizeIdentity($message->getCc()),
+            'bcc'             => static::normalizeIdentity($message->getBcc()),
+            'replyTo'         => static::normalizeIdentity($message->getReplyTo()),
+            'fromRendered'    => IdentityUtils::buildIdentityString($message->getFrom()),
+            'toRendered'      => IdentityUtils::buildIdentityString($message->getTo()),
+            'ccRendered'      => IdentityUtils::buildIdentityString($message->getCc()),
+            'bccRendered'     => IdentityUtils::buildIdentityString($message->getBcc()),
             'replyToRendered' => IdentityUtils::buildIdentityString($message->getReplyTo()),
-            'subject' => $message->getSubject(),
-            'headers' => $message->getHeaders(),
-            'html' => $message->getHtml(),
-            'text' => $message->getText(),
-        );
+            'subject'         => $message->getSubject(),
+            'headers'         => $message->getHeaders(),
+            'html'            => $message->getHtml(),
+            'text'            => $message->getText(),
+        ];
 
         if ($message instanceof TaggableInterface) {
             $normalizedMessage['tag'] = $message->getTag();
@@ -86,10 +86,10 @@ class StampieDataCollector extends DataCollector
     protected static function normalizeIdentity($identity)
     {
         if ($identity instanceof IdentityInterface) {
-            return array(
+            return [
                 'email' => $identity->getEmail(),
-                'name' => $identity->getName(),
-            );
+                'name'  => $identity->getName(),
+            ];
         }
 
         if (is_array($identity)) {

@@ -22,11 +22,11 @@ class Configuration implements ConfigurationInterface
     private $debug;
 
     /**
-     * @param Boolean $debug The kernel.debug value
+     * @param bool $debug The kernel.debug value
      */
     public function __construct($debug)
     {
-        $this->debug = (Boolean) $debug;
+        $this->debug = (bool) $debug;
     }
 
     public function getConfigTreeBuilder()
@@ -45,8 +45,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('logging')->defaultValue($this->debug)->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
 
         return $builder;
     }

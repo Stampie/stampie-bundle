@@ -9,7 +9,6 @@ use Stampie\Mailer\MailGun;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
-
     protected function setUp()
     {
         parent::setUp();
@@ -24,7 +23,6 @@ class BundleInitializationTest extends BaseBundleTestCase
 
     public function testInitBundle()
     {
-
         $kernel = $this->createKernel();
         $kernel->addConfigFile(__DIR__.'/config.yml');
 
@@ -38,5 +36,4 @@ class BundleInitializationTest extends BaseBundleTestCase
         $service = $container->get('hb_stampie.mailer.real');
         $this->assertInstanceOf(MailGun::class, $service);
     }
-
 }

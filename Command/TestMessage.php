@@ -14,12 +14,10 @@ namespace HB\StampieBundle\Command;
 use Stampie\IdentityInterface;
 
 /**
- * Class TestMessage
- * @package HB\StampieBundle\Command
+ * Class TestMessage.
  */
 class TestMessage extends \Stampie\Message
 {
-
     /**
      * @var
      */

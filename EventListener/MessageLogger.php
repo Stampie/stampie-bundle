@@ -8,16 +8,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageLogger implements EventSubscriberInterface
 {
-    protected $messages = array();
+    protected $messages = [];
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             StampieEvents::PRE_SEND => 'preSend',
-        );
+        ];
     }
 
     public function preSend(MessageEvent $event)
