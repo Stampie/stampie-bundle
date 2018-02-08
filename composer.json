@@ -23,7 +23,8 @@
         "symfony/phpunit-bridge": "^3.2"
     },
     "suggest": {
-        "stampie/extra": "to have event-based hooks in the mailer"
+        "stampie/extra": "to have event-based hooks in the mailer",
+        "php-http/httplug-bundle": "for easier HTTP clients configuration"
     },
     "autoload": {
         "psr-4": {
