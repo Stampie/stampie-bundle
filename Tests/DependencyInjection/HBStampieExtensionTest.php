@@ -6,6 +6,7 @@ use HB\StampieBundle\DependencyInjection\HBStampieExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
@@ -20,19 +21,20 @@ class HBStampieExtensionTest extends TestCase
         $this->extension = new HBStampieExtension();
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid adapter "DummyAdapter" specified
-     */
-    public function testExceptionWhenInvalidAdapterSpecified()
+    public function testWithCustomHttpClient()
     {
+        $container = $this->createContainerBuilder();
+
         $this->extension->load(array(
             'hb_stampie' => array(
-                'adapter' => 'DummyAdapter',
-                'mailer' => 'DummyMailer',
+                'http_client' => 'my.http_client',
+                'mailer' => 'mail_chimp',
                 'server_token' => 'token',
             ),
-        ), $this->createContainerBuilder());
+        ), $container);
+
+        $definition = $container->getDefinition('hb_stampie.mailer.real');
+        $this->assertEquals('my.http_client', (string) $definition->getArgument(0));
     }
 
     /**
@@ -43,7 +45,6 @@ class HBStampieExtensionTest extends TestCase
     {
         $this->extension->load(array(
             'hb_stampie' => array(
-                'adapter' => 'buzz',
                 'mailer' => 'DummyMailer',
                 'server_token' => 'token',
             ),
@@ -56,7 +57,6 @@ class HBStampieExtensionTest extends TestCase
 
         $this->extension->load(array(
             'hb_stampie' => array(
-                'adapter' => 'buzz',
                 'mailer' => 'postmark',
                 'server_token' => 'token',
             ),
@@ -74,7 +74,7 @@ class HBStampieExtensionTest extends TestCase
         $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer.real')->getParent());
 
         $this->assertEquals(array(
-            $builder->getDefinition('hb_stampie.adapter.buzz'),
+            new Reference('httplug.client'),
             'token',
         ), $builder->getDefinition('hb_stampie.mailer.real')->getArguments());
     }
@@ -90,7 +90,6 @@ class HBStampieExtensionTest extends TestCase
 
         $this->extension->load(array(
             'hb_stampie' => array(
-                'adapter' => 'buzz',
                 'mailer' => 'postmark',
                 'server_token' => 'token',
                 'extra' => array(
@@ -103,10 +102,11 @@ class HBStampieExtensionTest extends TestCase
         $this->assertTrue($builder->hasDefinition('hb_stampie.data_collector'));
     }
 
-    protected function createContainerBuilder($kernelDebug = false)
+    protected function createContainerBuilder($kernelDebug = false, $kernelBundles = array())
     {
         return new ContainerBuilder(new ParameterBag(array(
             'kernel.debug' => $kernelDebug,
+            'kernel.bundles' => $kernelBundles,
         )));
     }
 }
