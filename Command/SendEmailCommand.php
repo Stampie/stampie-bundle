@@ -19,12 +19,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class SendEmailCommand
- * @package HB\StampieBundle\Command
+ * Class SendEmailCommand.
  */
 class SendEmailCommand extends ContainerAwareCommand
 {
-
     /**
      * {@inheritdoc}
      */
@@ -34,8 +32,7 @@ class SendEmailCommand extends ContainerAwareCommand
             ->setName('stampie:test')
             ->setDescription('Send a test email with the default mailer')
             ->addArgument('to', InputArgument::REQUIRED, 'The email address to send the test mail to')
-            ->addArgument('from', InputArgument::OPTIONAL, 'The "from" email address', 'from@example.com')
-        ;
+            ->addArgument('from', InputArgument::OPTIONAL, 'The "from" email address', 'from@example.com');
     }
 
     /**
@@ -53,7 +50,7 @@ class SendEmailCommand extends ContainerAwareCommand
         $output->writeln(sprintf('Sending message from <info>%s</info> to <info>%s</info> using <info>%s</info> mailer',
             $from, $to, $mailerClass->getShortName()));
 
-        $identity= new Identity($to);
+        $identity = new Identity($to);
         $message = new TestMessage($identity, $from);
         $message->setText('This is a test message');
         $mailer->send($message);
