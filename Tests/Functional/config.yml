@@ -1,0 +1,7 @@
+hb_stampie:
+    mailer: mailgun
+    server_token: foo:bar
+
+services:
+  httplug.client:
+    class: Http\Client\Curl\Client

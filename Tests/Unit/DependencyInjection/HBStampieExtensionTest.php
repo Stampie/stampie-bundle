@@ -1,6 +1,6 @@
 <?php
 
-namespace HB\StampieBundle\Tests\DependencyInjection;
+namespace HB\StampieBundle\Tests\Unit\DependencyInjection;
 
 use HB\StampieBundle\DependencyInjection\HBStampieExtension;
 use PHPUnit\Framework\TestCase;
