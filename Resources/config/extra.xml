@@ -6,36 +6,36 @@
 
 
     <parameters>
-        <parameter key="hb_stampie.extra.mailer.class">Stampie\Extra\Mailer</parameter>
-        <parameter key="hb_stampie.data_collector.class">HB\StampieBundle\DataCollector\StampieDataCollector</parameter>
+        <parameter key="stampie.extra.mailer.class">Stampie\Extra\Mailer</parameter>
+        <parameter key="stampie.data_collector.class">Stampie\StampieBundle\DataCollector\StampieDataCollector</parameter>
 
         <!-- Listeners -->
-        <parameter key="hb_stampie.extra.listener.impersonate.class">Stampie\Extra\EventListener\ImpersonateListener</parameter>
-        <parameter key="hb_stampie.listener.message_logger.class">HB\StampieBundle\EventListener\MessageLogger</parameter>
+        <parameter key="stampie.extra.listener.impersonate.class">Stampie\Extra\EventListener\ImpersonateListener</parameter>
+        <parameter key="stampie.listener.message_logger.class">Stampie\StampieBundle\EventListener\MessageLogger</parameter>
 
     </parameters>
 
     <services>
-        <service id="hb_stampie.extra.mailer" class="%hb_stampie.extra.mailer.class%" public="false">
-            <argument type="service" id="hb_stampie.mailer.real" />
+        <service id="stampie.extra.mailer" class="%stampie.extra.mailer.class%" public="false">
+            <argument type="service" id="stampie.mailer.real" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="hb_stampie.data_collector" class="%hb_stampie.data_collector.class%" public="false">
-            <argument type="service" id="hb_stampie.listener.message_logger" on-invalid="ignore" />
-            <tag name="data_collector" id="stampie" template="HBStampieBundle:Collector:messages.html.twig"/>
+        <service id="stampie.data_collector" class="%stampie.data_collector.class%" public="false">
+            <argument type="service" id="stampie.listener.message_logger" on-invalid="ignore" />
+            <tag name="data_collector" id="stampie" template="StampieBundle:Collector:messages.html.twig"/>
         </service>
 
         <!--
             Listeners:
                 These are removed by the DI extension when they should not be activated.
         -->
-        <service id="hb_stampie.extra.listener.impersonate" class="%hb_stampie.extra.listener.impersonate.class%">
+        <service id="stampie.extra.listener.impersonate" class="%stampie.extra.listener.impersonate.class%">
             <tag name="kernel.event_subscriber" />
             <argument /><!-- delivery address -->
         </service>
 
-        <service id="hb_stampie.listener.message_logger" class="%hb_stampie.listener.message_logger.class%">
+        <service id="stampie.listener.message_logger" class="%stampie.listener.message_logger.class%">
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

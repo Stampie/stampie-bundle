@@ -1,9 +1,9 @@
 <?php
 
-namespace HB\StampieBundle\Tests\Unit\DependencyInjection;
+namespace Stampie\StampieBundle\Tests\Unit\DependencyInjection;
 
-use HB\StampieBundle\DependencyInjection\HBStampieExtension;
 use PHPUnit\Framework\TestCase;
+use Stampie\StampieBundle\DependencyInjection\StampieExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Reference;
@@ -11,14 +11,14 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class HBStampieExtensionTest extends TestCase
+class StampieExtensionTest extends TestCase
 {
-    /** @var HBStampieExtension */
+    /** @var StampieExtension */
     private $extension;
 
     protected function setUp()
     {
-        $this->extension = new HBStampieExtension();
+        $this->extension = new StampieExtension();
     }
 
     public function testWithCustomHttpClient()
@@ -26,14 +26,14 @@ class HBStampieExtensionTest extends TestCase
         $container = $this->createContainerBuilder();
 
         $this->extension->load([
-            'hb_stampie' => [
+            'stampie' => [
                 'http_client'  => 'my.http_client',
                 'mailer'       => 'mail_chimp',
                 'server_token' => 'token',
             ],
         ], $container);
 
-        $definition = $container->getDefinition('hb_stampie.mailer.real');
+        $definition = $container->getDefinition('stampie.mailer.real');
         $this->assertEquals('my.http_client', (string) $definition->getArgument(0));
     }
 
@@ -44,44 +44,44 @@ class HBStampieExtensionTest extends TestCase
     public function testExceptionWhenInvalidMailerSpecified()
     {
         $this->extension->load([
-            'hb_stampie' => [
+            'stampie' => [
                 'mailer'       => 'DummyMailer',
                 'server_token' => 'token',
             ],
         ], $this->createContainerBuilder());
     }
 
-    public function testHBStampieMailerDefinitionIsBuilt()
+    public function testStampieMailerDefinitionIsBuilt()
     {
         $builder = $this->createContainerBuilder();
 
         $this->extension->load([
-            'hb_stampie' => [
+            'stampie' => [
                 'mailer'       => 'postmark',
                 'server_token' => 'token',
             ],
         ], $builder);
 
-        $this->assertTrue($builder->hasAlias('hb_stampie.mailer'));
-        $this->assertEquals('hb_stampie.mailer.real', (string) $builder->getAlias('hb_stampie.mailer'));
+        $this->assertTrue($builder->hasAlias('stampie.mailer'));
+        $this->assertEquals('stampie.mailer.real', (string) $builder->getAlias('stampie.mailer'));
 
-        $this->assertTrue($builder->hasDefinition('hb_stampie.mailer.real'));
+        $this->assertTrue($builder->hasDefinition('stampie.mailer.real'));
         if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
-            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('hb_stampie.mailer.real'));
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('stampie.mailer.real'));
         } else {
-            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('hb_stampie.mailer.real'));
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('stampie.mailer.real'));
         }
-        $this->assertEquals('hb_stampie.mailer.postmark', $builder->getDefinition('hb_stampie.mailer.real')->getParent());
+        $this->assertEquals('stampie.mailer.postmark', $builder->getDefinition('stampie.mailer.real')->getParent());
 
         $this->assertEquals([
             new Reference('httplug.client'),
             'token',
-        ], $builder->getDefinition('hb_stampie.mailer.real')->getArguments());
+        ], $builder->getDefinition('stampie.mailer.real')->getArguments());
     }
 
     public function testAlias()
     {
-        $this->assertEquals('hb_stampie', $this->extension->getAlias());
+        $this->assertEquals('stampie', $this->extension->getAlias());
     }
 
     public function testExtraLogging()
@@ -89,7 +89,7 @@ class HBStampieExtensionTest extends TestCase
         $builder = $this->createContainerBuilder();
 
         $this->extension->load([
-            'hb_stampie' => [
+            'stampie' => [
                 'mailer'       => 'postmark',
                 'server_token' => 'token',
                 'extra'        => [
@@ -98,8 +98,8 @@ class HBStampieExtensionTest extends TestCase
             ],
         ], $builder);
 
-        $this->assertTrue($builder->hasDefinition('hb_stampie.listener.message_logger'));
-        $this->assertTrue($builder->hasDefinition('hb_stampie.data_collector'));
+        $this->assertTrue($builder->hasDefinition('stampie.listener.message_logger'));
+        $this->assertTrue($builder->hasDefinition('stampie.data_collector'));
     }
 
     protected function createContainerBuilder($kernelDebug = false, $kernelBundles = [])

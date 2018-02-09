@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the HBStampieBundle package.
+ * This file is part of the StampieBundle package.
  *
  * (c) Henrik Bjornskov <henrik@bjrnskov.dk>
  *
@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace HB\StampieBundle\Command;
+namespace Stampie\StampieBundle\Command;
 
 use Stampie\IdentityInterface;
+use Stampie\Message;
 
 /**
  * Class TestMessage.
  */
-class TestMessage extends \Stampie\Message
+class TestMessage extends Message
 {
     /**
      * @var

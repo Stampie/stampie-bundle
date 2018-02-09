@@ -1,11 +1,11 @@
 <?php
 
-namespace HB\StampieBundle\DataCollector;
+namespace Stampie\StampieBundle\DataCollector;
 
-use HB\StampieBundle\EventListener\MessageLogger;
 use Stampie\IdentityInterface;
 use Stampie\Message\TaggableInterface;
 use Stampie\MessageInterface;
+use Stampie\StampieBundle\EventListener\MessageLogger;
 use Stampie\Util\IdentityUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

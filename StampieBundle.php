@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the HBStampieBundle package.
+ * This file is part of the StampieBundle package.
  *
  * (c) Henrik Bjornskov <henrik@bjrnskov.dk>
  *
@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace HB\StampieBundle;
+namespace Stampie\StampieBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class HBStampieBundle extends \Symfony\Component\HttpKernel\Bundle\Bundle
+class StampieBundle extends Bundle
 {
 }

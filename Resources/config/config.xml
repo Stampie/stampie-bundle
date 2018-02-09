@@ -7,18 +7,18 @@
 
     <parameters>
         <!-- Mailers -->
-        <parameter key="hb_stampie.mailer.send_grid.class">Stampie\Mailer\SendGrid</parameter>
-        <parameter key="hb_stampie.mailer.mail_chimp.class">Stampie\Mailer\MailChimpSts</parameter>
-        <parameter key="hb_stampie.mailer.postmark.class">Stampie\Mailer\Postmark</parameter>
-        <parameter key="hb_stampie.mailer.mailgun.class">Stampie\Mailer\MailGun</parameter>
-        <parameter key="hb_stampie.mailer.mandrill.class">Stampie\Mailer\Mandrill</parameter>
+        <parameter key="stampie.mailer.send_grid.class">Stampie\Mailer\SendGrid</parameter>
+        <parameter key="stampie.mailer.mail_chimp.class">Stampie\Mailer\MailChimpSts</parameter>
+        <parameter key="stampie.mailer.postmark.class">Stampie\Mailer\Postmark</parameter>
+        <parameter key="stampie.mailer.mailgun.class">Stampie\Mailer\MailGun</parameter>
+        <parameter key="stampie.mailer.mandrill.class">Stampie\Mailer\Mandrill</parameter>
     </parameters>
 
     <services>
-        <service id="hb_stampie.mailer.send_grid" class="%hb_stampie.mailer.send_grid.class%" abstract="true" />
-        <service id="hb_stampie.mailer.mail_chimp" class="%hb_stampie.mailer.mail_chimp.class%" abstract="true" />
-        <service id="hb_stampie.mailer.postmark" class="%hb_stampie.mailer.postmark.class%" abstract="true" />
-        <service id="hb_stampie.mailer.mailgun" class="%hb_stampie.mailer.mailgun.class%" abstract="true" />
-        <service id="hb_stampie.mailer.mandrill" class="%hb_stampie.mailer.mandrill.class%" abstract="true" />
+        <service id="stampie.mailer.send_grid" class="%stampie.mailer.send_grid.class%" abstract="true" />
+        <service id="stampie.mailer.mail_chimp" class="%stampie.mailer.mail_chimp.class%" abstract="true" />
+        <service id="stampie.mailer.postmark" class="%stampie.mailer.postmark.class%" abstract="true" />
+        <service id="stampie.mailer.mailgun" class="%stampie.mailer.mailgun.class%" abstract="true" />
+        <service id="stampie.mailer.mandrill" class="%stampie.mailer.mandrill.class%" abstract="true" />
     </services>
 </container>
