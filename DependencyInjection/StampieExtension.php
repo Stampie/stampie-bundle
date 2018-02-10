@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the HBStampieBundle package.
+ * This file is part of the StampieBundle package.
  *
  * (c) Henrik Bjornskov <henrik@bjrnskov.dk>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HB\StampieBundle\DependencyInjection;
+namespace Stampie\StampieBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -18,11 +18,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjection\Extension
+class StampieExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -32,7 +33,7 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration($container->getParameter('kernel.debug')), $configs);
 
-        $mailerServiceId = sprintf('hb_stampie.mailer.%s', $config['mailer']);
+        $mailerServiceId = sprintf('stampie.mailer.%s', $config['mailer']);
 
         if (!$container->has($mailerServiceId)) {
             throw new \InvalidArgumentException(sprintf('Invalid mailer "%s" specified', $config['mailer']));
@@ -44,7 +45,7 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
             $definition = new DefinitionDecorator($mailerServiceId);
         }
 
-        // get the abstract definition of an mailer and create "hb_stampie" based on it
+        // get the abstract definition of an mailer and create "stampie" based on it
         $definition
             ->setPublic(false)
             ->setArguments([
@@ -52,22 +53,17 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
                 $config['server_token'],
             ]);
 
-        $container->setDefinition('hb_stampie.mailer.real', $definition);
+        $container->setDefinition('stampie.mailer.real', $definition);
 
-        $mailerId = 'hb_stampie.mailer.real';
+        $mailerId = 'stampie.mailer.real';
 
         if (isset($config['extra'])) {
             $this->loadExtra($config['extra'], $container, $loader);
 
-            $mailerId = 'hb_stampie.extra.mailer';
+            $mailerId = 'stampie.extra.mailer';
         }
 
-        $container->setAlias('hb_stampie.mailer', $mailerId);
-    }
-
-    public function getAlias()
-    {
-        return 'hb_stampie';
+        $container->setAlias('stampie.mailer', $mailerId);
     }
 
     private function loadExtra(array $config, ContainerBuilder $container, XmlFileLoader $loader)
@@ -79,14 +75,14 @@ class HBStampieExtension extends \Symfony\Component\HttpKernel\DependencyInjecti
         $loader->load('extra.xml');
 
         if (!empty($config['delivery_address'])) {
-            $container->getDefinition('hb_stampie.extra.listener.impersonate')
+            $container->getDefinition('stampie.extra.listener.impersonate')
                 ->replaceArgument(0, $config['delivery_address']);
         } else {
-            $container->removeDefinition('hb_stampie.extra.listener.impersonate');
+            $container->removeDefinition('stampie.extra.listener.impersonate');
         }
 
         if (!$config['logging']) {
-            $container->removeDefinition('hb_stampie.listener.message_logger');
+            $container->removeDefinition('stampie.listener.message_logger');
         }
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the HBStampieBundle package.
+ * This file is part of the StampieBundle package.
  *
  * (c) Henrik Bjornskov <henrik@bjrnskov.dk>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HB\StampieBundle\Command;
+namespace Stampie\StampieBundle\Command;
 
 use Stampie\Identity;
 use Stampie\MailerInterface;
@@ -44,7 +44,7 @@ class SendEmailCommand extends ContainerAwareCommand
         $from = $input->getArgument('from');
 
         /** @var MailerInterface $mailer */
-        $mailer = $this->getContainer()->get('hb_stampie.mailer');
+        $mailer = $this->getContainer()->get('stampie.mailer');
         $mailerClass = new \ReflectionClass($mailer);
 
         $output->writeln(sprintf('Sending message from <info>%s</info> to <info>%s</info> using <info>%s</info> mailer',

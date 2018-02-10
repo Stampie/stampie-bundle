@@ -1,4 +1,4 @@
-hb_stampie:
+stampie:
     mailer: mailgun
     server_token: foo:bar
 

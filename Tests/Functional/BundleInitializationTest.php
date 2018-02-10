@@ -1,11 +1,11 @@
 <?php
 
-namespace HB\StampieBundle\Tests\Functional;
+namespace Stampie\StampieBundle\Tests\Functional;
 
-use HB\StampieBundle\HBStampieBundle;
 use Nyholm\BundleTest\BaseBundleTestCase;
 use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Stampie\Mailer\MailGun;
+use Stampie\StampieBundle\StampieBundle;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
@@ -13,12 +13,12 @@ class BundleInitializationTest extends BaseBundleTestCase
     {
         parent::setUp();
 
-        $this->addCompilerPass(new PublicServicePass('|hb_stampie.*|'));
+        $this->addCompilerPass(new PublicServicePass('|stampie.*|'));
     }
 
     protected function getBundleClass()
     {
-        return HBStampieBundle::class;
+        return StampieBundle::class;
     }
 
     public function testInitBundle()
@@ -32,8 +32,8 @@ class BundleInitializationTest extends BaseBundleTestCase
         // Get the container
         $container = $this->getContainer();
 
-        $this->assertTrue($container->has('hb_stampie.mailer.real'));
-        $service = $container->get('hb_stampie.mailer.real');
+        $this->assertTrue($container->has('stampie.mailer.real'));
+        $service = $container->get('stampie.mailer.real');
         $this->assertInstanceOf(MailGun::class, $service);
     }
 }

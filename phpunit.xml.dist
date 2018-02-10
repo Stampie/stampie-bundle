@@ -2,7 +2,7 @@
 
 <phpunit bootstrap="./vendor/autoload.php" colors="true">
     <testsuites>
-        <testsuite name="HBStampieBundle">
+        <testsuite name="StampieBundle">
             <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the HBStampieBundle package.
+ * This file is part of the StampieBundle package.
  *
  * (c) Henrik Bjornskov <henrik@bjrnskov.dk>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HB\StampieBundle\DependencyInjection;
+namespace Stampie\StampieBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $builder = new TreeBuilder();
-        $root = $builder->root('hb_stampie');
+        $root = $builder->root('stampie');
 
         $root
             ->children()

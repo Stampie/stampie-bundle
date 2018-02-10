@@ -1,6 +1,6 @@
 <?php
 
-namespace HB\StampieBundle\EventListener;
+namespace Stampie\StampieBundle\EventListener;
 
 use Stampie\Extra\Event\MessageEvent;
 use Stampie\Extra\StampieEvents;
