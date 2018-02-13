@@ -13,7 +13,7 @@ Add the configuration to `config.yml` as follows
 ``` yaml
 stampie:
     adapter: buzz # buzz, guzzle and noop are supported
-    mailer: postmark # [send_grid, mail_chimp, postmark] is supported
+    mailer: postmark # [send_grid, postmark, mailgun, mandrill] is supported
     server_token: POSTMARK_API_TEST # Replace with your ServerToken for you Service
 ```
 
