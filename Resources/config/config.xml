@@ -3,22 +3,10 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-
-    <parameters>
-        <!-- Mailers -->
-        <parameter key="stampie.mailer.send_grid.class">Stampie\Mailer\SendGrid</parameter>
-        <parameter key="stampie.mailer.mail_chimp.class">Stampie\Mailer\MailChimpSts</parameter>
-        <parameter key="stampie.mailer.postmark.class">Stampie\Mailer\Postmark</parameter>
-        <parameter key="stampie.mailer.mailgun.class">Stampie\Mailer\MailGun</parameter>
-        <parameter key="stampie.mailer.mandrill.class">Stampie\Mailer\Mandrill</parameter>
-    </parameters>
-
     <services>
-        <service id="stampie.mailer.send_grid" class="%stampie.mailer.send_grid.class%" abstract="true" />
-        <service id="stampie.mailer.mail_chimp" class="%stampie.mailer.mail_chimp.class%" abstract="true" />
-        <service id="stampie.mailer.postmark" class="%stampie.mailer.postmark.class%" abstract="true" />
-        <service id="stampie.mailer.mailgun" class="%stampie.mailer.mailgun.class%" abstract="true" />
-        <service id="stampie.mailer.mandrill" class="%stampie.mailer.mandrill.class%" abstract="true" />
+        <service id="stampie.mailer.send_grid" class="Stampie\Mailer\SendGrid" abstract="true" />
+        <service id="stampie.mailer.postmark" class="Stampie\Mailer\Postmark" abstract="true" />
+        <service id="stampie.mailer.mailgun" class="Stampie\Mailer\MailGun" abstract="true" />
+        <service id="stampie.mailer.mandrill" class="Stampie\Mailer\Mandrill" abstract="true" />
     </services>
 </container>

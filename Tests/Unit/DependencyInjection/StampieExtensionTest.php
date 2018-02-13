@@ -28,7 +28,7 @@ class StampieExtensionTest extends TestCase
         $this->extension->load([
             'stampie' => [
                 'http_client'  => 'my.http_client',
-                'mailer'       => 'mail_chimp',
+                'mailer'       => 'postmark',
                 'server_token' => 'token',
             ],
         ], $container);
