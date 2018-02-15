@@ -8,5 +8,7 @@
         <service id="stampie.mailer.postmark" class="Stampie\Mailer\Postmark" abstract="true" />
         <service id="stampie.mailer.mailgun" class="Stampie\Mailer\MailGun" abstract="true" />
         <service id="stampie.mailer.mandrill" class="Stampie\Mailer\Mandrill" abstract="true" />
+        <service id="stampie.mailer.mailjet" class="Stampie\Mailer\Mailjet" abstract="true" />
+        <service id="stampie.mailer.spark_post" class="Stampie\Mailer\SparkPost" abstract="true" />
     </services>
 </container>
