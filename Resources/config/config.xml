@@ -11,6 +11,8 @@
         <service id="stampie.mailer.mailjet" class="Stampie\Mailer\Mailjet" abstract="true" />
         <service id="stampie.mailer.spark_post" class="Stampie\Mailer\SparkPost" abstract="true" />
 
+        <service id="Stampie\MailerInterface" alias="stampie.mailer" public="false" />
+
         <service id="stampie.command.send_email" class="Stampie\StampieBundle\Command\SendEmailCommand">
             <tag name="console.command" command="stampie:test" />
             <argument type="service" id="stampie.mailer" />
