@@ -12,7 +12,7 @@
 
         <service id="stampie.data_collector" class="Stampie\StampieBundle\DataCollector\StampieDataCollector" public="false">
             <argument type="service" id="stampie.listener.message_logger" on-invalid="ignore" />
-            <tag name="data_collector" id="stampie" template="StampieBundle:Collector:messages.html.twig"/>
+            <tag name="data_collector" id="stampie" template="@Stampie/Collector/messages.html.twig"/>
         </service>
 
         <!--
