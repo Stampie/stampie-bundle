@@ -5,8 +5,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="stampie.extra.mailer" class="Stampie\Extra\Mailer" public="false">
-            <argument type="service" id="stampie.mailer.real" />
+        <service id="stampie.extra.mailer" class="Stampie\Extra\Mailer" public="false" decorates="stampie.mailer">
+            <argument type="service" id="stampie.extra.mailer.inner" />
             <argument type="service" id="event_dispatcher" />
         </service>
 

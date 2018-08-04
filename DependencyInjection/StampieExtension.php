@@ -47,23 +47,17 @@ class StampieExtension extends Extension
 
         // get the abstract definition of an mailer and create "stampie" based on it
         $definition
-            ->setPublic(false)
+            ->setPublic(true)
             ->setArguments([
                 new Reference($config['http_client']),
                 $config['server_token'],
             ]);
 
-        $container->setDefinition('stampie.mailer.real', $definition);
-
-        $mailerId = 'stampie.mailer.real';
+        $container->setDefinition('stampie.mailer', $definition);
 
         if (isset($config['extra'])) {
             $this->loadExtra($config['extra'], $container, $loader);
-
-            $mailerId = 'stampie.extra.mailer';
         }
-
-        $container->setAlias('stampie.mailer', $mailerId);
     }
 
     private function loadExtra(array $config, ContainerBuilder $container, XmlFileLoader $loader)

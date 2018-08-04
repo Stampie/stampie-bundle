@@ -3,19 +3,11 @@
 namespace Stampie\StampieBundle\Tests\Functional;
 
 use Nyholm\BundleTest\BaseBundleTestCase;
-use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Stampie\Mailer\MailGun;
 use Stampie\StampieBundle\StampieBundle;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->addCompilerPass(new PublicServicePass('|stampie.*|'));
-    }
-
     protected function getBundleClass()
     {
         return StampieBundle::class;
@@ -32,8 +24,8 @@ class BundleInitializationTest extends BaseBundleTestCase
         // Get the container
         $container = $this->getContainer();
 
-        $this->assertTrue($container->has('stampie.mailer.real'));
-        $service = $container->get('stampie.mailer.real');
+        $this->assertTrue($container->has('stampie.mailer'));
+        $service = $container->get('stampie.mailer');
         $this->assertInstanceOf(MailGun::class, $service);
     }
 }

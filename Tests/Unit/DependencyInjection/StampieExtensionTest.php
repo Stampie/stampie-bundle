@@ -33,7 +33,7 @@ class StampieExtensionTest extends TestCase
             ],
         ], $container);
 
-        $definition = $container->getDefinition('stampie.mailer.real');
+        $definition = $container->getDefinition('stampie.mailer');
         $this->assertEquals('my.http_client', (string) $definition->getArgument(0));
     }
 
@@ -62,21 +62,18 @@ class StampieExtensionTest extends TestCase
             ],
         ], $builder);
 
-        $this->assertTrue($builder->hasAlias('stampie.mailer'));
-        $this->assertEquals('stampie.mailer.real', (string) $builder->getAlias('stampie.mailer'));
-
-        $this->assertTrue($builder->hasDefinition('stampie.mailer.real'));
+        $this->assertTrue($builder->hasDefinition('stampie.mailer'));
         if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
-            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('stampie.mailer.real'));
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('stampie.mailer'));
         } else {
-            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('stampie.mailer.real'));
+            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('stampie.mailer'));
         }
-        $this->assertEquals('stampie.mailer.postmark', $builder->getDefinition('stampie.mailer.real')->getParent());
+        $this->assertEquals('stampie.mailer.postmark', $builder->getDefinition('stampie.mailer')->getParent());
 
         $this->assertEquals([
             new Reference('httplug.client'),
             'token',
-        ], $builder->getDefinition('stampie.mailer.real')->getArguments());
+        ], $builder->getDefinition('stampie.mailer')->getArguments());
     }
 
     public function testAlias()
