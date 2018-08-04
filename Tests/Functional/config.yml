@@ -1,6 +1,7 @@
 stampie:
     mailer: mailgun
     server_token: foo:bar
+    extra: false
 
 services:
   httplug.client:

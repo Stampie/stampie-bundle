@@ -55,7 +55,7 @@ class StampieExtension extends Extension
 
         $container->setDefinition('stampie.mailer', $definition);
 
-        if (isset($config['extra'])) {
+        if ($config['extra']['enabled']) {
             $this->loadExtra($config['extra'], $container, $loader);
         }
     }
