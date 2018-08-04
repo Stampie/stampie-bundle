@@ -4,6 +4,10 @@
 
 Integrates [Stampie](https://github.com/Stampie/Stampie) with Symfony.
 
+```bash
+$ composer require stampie/stampie-bundle
+```
+
 ## Usage
 
 Add `Stampie\StampieBundle\StampieBundle()` to your `AppKernel.php` in the `registerBundles` method.
