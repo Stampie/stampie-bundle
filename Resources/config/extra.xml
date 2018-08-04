@@ -4,38 +4,27 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
-    <parameters>
-        <parameter key="stampie.extra.mailer.class">Stampie\Extra\Mailer</parameter>
-        <parameter key="stampie.data_collector.class">Stampie\StampieBundle\DataCollector\StampieDataCollector</parameter>
-
-        <!-- Listeners -->
-        <parameter key="stampie.extra.listener.impersonate.class">Stampie\Extra\EventListener\ImpersonateListener</parameter>
-        <parameter key="stampie.listener.message_logger.class">Stampie\StampieBundle\EventListener\MessageLogger</parameter>
-
-    </parameters>
-
     <services>
-        <service id="stampie.extra.mailer" class="%stampie.extra.mailer.class%" public="false">
-            <argument type="service" id="stampie.mailer.real" />
+        <service id="stampie.extra.mailer" class="Stampie\Extra\Mailer" public="false" decorates="stampie.mailer">
+            <argument type="service" id="stampie.extra.mailer.inner" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="stampie.data_collector" class="%stampie.data_collector.class%" public="false">
+        <service id="stampie.data_collector" class="Stampie\StampieBundle\DataCollector\StampieDataCollector" public="false">
             <argument type="service" id="stampie.listener.message_logger" on-invalid="ignore" />
-            <tag name="data_collector" id="stampie" template="StampieBundle:Collector:messages.html.twig"/>
+            <tag name="data_collector" id="stampie" template="@Stampie/Collector/messages.html.twig"/>
         </service>
 
         <!--
             Listeners:
                 These are removed by the DI extension when they should not be activated.
         -->
-        <service id="stampie.extra.listener.impersonate" class="%stampie.extra.listener.impersonate.class%">
+        <service id="stampie.extra.listener.impersonate" class="Stampie\Extra\EventListener\ImpersonateListener">
             <tag name="kernel.event_subscriber" />
             <argument /><!-- delivery address -->
         </service>
 
-        <service id="stampie.listener.message_logger" class="%stampie.listener.message_logger.class%">
+        <service id="stampie.listener.message_logger" class="Stampie\StampieBundle\EventListener\MessageLogger">
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

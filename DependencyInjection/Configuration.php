@@ -31,8 +31,14 @@ class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $root = $builder->root('stampie');
+        $builder = new TreeBuilder('stampie');
+
+        if (\method_exists($builder, 'getRootNode')) {
+            $root = $builder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $root = $builder->root('stampie');
+        }
 
         $root
             ->children()

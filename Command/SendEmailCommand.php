@@ -13,7 +13,7 @@ namespace Stampie\StampieBundle\Command;
 
 use Stampie\Identity;
 use Stampie\MailerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,8 +21,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class SendEmailCommand.
  */
-class SendEmailCommand extends ContainerAwareCommand
+class SendEmailCommand extends Command
 {
+    private $mailer;
+
+    public function __construct(MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+
+        parent::__construct();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,9 +52,7 @@ class SendEmailCommand extends ContainerAwareCommand
         $to = $input->getArgument('to');
         $from = $input->getArgument('from');
 
-        /** @var MailerInterface $mailer */
-        $mailer = $this->getContainer()->get('stampie.mailer');
-        $mailerClass = new \ReflectionClass($mailer);
+        $mailerClass = new \ReflectionClass($this->mailer);
 
         $output->writeln(sprintf('Sending message from <info>%s</info> to <info>%s</info> using <info>%s</info> mailer',
             $from, $to, $mailerClass->getShortName()));
@@ -53,7 +60,7 @@ class SendEmailCommand extends ContainerAwareCommand
         $identity = new Identity($to);
         $message = new TestMessage($identity, $from);
         $message->setText('This is a test message');
-        $mailer->send($message);
+        $this->mailer->send($message);
         $output->writeln(sprintf('Message successfully sent to <info>%s</info>', $to));
     }
 }
