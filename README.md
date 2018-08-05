@@ -1,6 +1,6 @@
 # StampieBundle
 
-[![Build Status](https://api.travis-ci.org/Stampie/HBStampieBundle.png)](https://travis-ci.org/Stampie/HBStampieBundle)
+[![Build Status](https://travis-ci.org/Stampie/stampie-bundle.svg)](https://travis-ci.org/Stampie/stampie-bundle)
 
 Integrates [Stampie](https://github.com/Stampie/Stampie) with Symfony.
 
@@ -16,16 +16,19 @@ Add the configuration to `config.yml` as follows
 
 ``` yaml
 stampie:
-    adapter: buzz # buzz, guzzle and noop are supported
-    mailer: postmark # [send_grid, postmark, mailgun, mandrill, mailjet, spark_post] is supported
-    server_token: POSTMARK_API_TEST # Replace with your ServerToken for you Service
+    mailer: postmark # [send_grid, postmark, mailgun, mandrill, mailjet, spark_post] are supported
+    server_token: POSTMARK_API_TEST # Replace with your ServerToken for your Service
 ```
 
-For the `buzz` adapter to work it is required to have a `buzz` service fortunately [SensioBuzzBundle](http://github.com/sensio/SensioBuzzBundle)
-provides this.
+The HttpClient used by the bundle is configurable. By default, it uses the service `httplug.client`, which
+is the name of the default HTTP client when using [HttplugBundle](https://github.com/php-http/HttplugBundle).
+Using this bundle is optional. You can provide your own service integrating HTTPlug:
 
-If you want to use the `guzzle` adapter, the [MisdGuzzleBundle](https://github.com/misd-service-development/guzzle-bundle) provides
-the required dependencies.
+
+``` yaml
+stampie:
+    http_client: my_http_client
+```
 
 ## StampieExtra
 
