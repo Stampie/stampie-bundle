@@ -59,6 +59,7 @@ class StampieExtensionTest extends TestCase
             'stampie' => [
                 'mailer'       => 'postmark',
                 'server_token' => 'token',
+                'extra'        => false,
             ],
         ], $builder);
 

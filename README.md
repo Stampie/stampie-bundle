@@ -32,14 +32,9 @@ stampie:
 
 ## StampieExtra
 
-This bundles allows you to use [StampieExtra](https://github.com/stof/StampieExtra) easily:
-add the extra library in your project and activate the configuration to wrap the mailer
-in the extra mailer dispatching events:
-
-``` yaml
-stampie:
-    extra: ~
-```
+This bundles allows you to use [StampieExtra](https://github.com/Stampie/extra) easily:
+add the extra library in your project. The integration is activated automatically to wrap the mailer
+in the extra mailer dispatching events. An integration with the profiler is also provided.
 
 If you want to enable the ImpersonateListener to send all emails to the same address, provide
 a non-empty delivery address:

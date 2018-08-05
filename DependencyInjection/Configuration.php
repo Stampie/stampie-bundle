@@ -11,6 +11,7 @@
 
 namespace Stampie\StampieBundle\DependencyInjection;
 
+use Stampie\Extra\Mailer;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -46,6 +47,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('server_token')->isRequired()->end()
                 ->scalarNode('http_client')->defaultValue('httplug.client')->end()
                 ->arrayNode('extra')
+                    ->{class_exists(Mailer::class) ? 'canBeDisabled' : 'canBeEnabled'}()
                     ->children()
                         ->scalarNode('delivery_address')->defaultNull()->end()
                         ->scalarNode('logging')->defaultValue($this->debug)->end()
