@@ -74,6 +74,7 @@ class StampieDataCollector extends DataCollector
             'headers'         => $message->getHeaders(),
             'html'            => $message->getHtml(),
             'text'            => $message->getText(),
+            'base64_html'     => base64_encode($message->getHtml()),
         ];
 
         if ($message instanceof TaggableInterface) {
