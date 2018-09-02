@@ -15,12 +15,12 @@
         "symfony/dependency-injection" : "^2.7 || ^3.0 || ^4.0",
         "symfony/framework-bundle"     : "^2.7 || ^3.0 || ^4.0",
         "symfony/http-kernel"          : "^2.7 || ^3.0 || ^4.0",
-        "stampie/stampie"              : "^1.0@beta"
+        "stampie/stampie"              : "^1.0"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.4",
         "php-http/curl-client": "^1.7",
-        "stampie/extra": "^1.0@beta",
+        "stampie/extra": "^1.0",
         "symfony/phpunit-bridge": "^4.0",
         "nyholm/symfony-bundle-test": "^1.3.1"
     },
