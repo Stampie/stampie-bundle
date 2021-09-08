@@ -3,6 +3,9 @@ stampie:
     server_token: foo:bar
     extra: false
 
+parameters:
+    container.autowiring.strict_mode: true
+
 services:
   httplug.client:
     class: Http\Client\Curl\Client

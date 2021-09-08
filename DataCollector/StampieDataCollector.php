@@ -60,21 +60,21 @@ class StampieDataCollector extends DataCollector
     protected static function normalizeMessage(MessageInterface $message)
     {
         $normalizedMessage = [
-            'from'            => static::normalizeIdentity($message->getFrom()),
-            'to'              => static::normalizeIdentity($message->getTo()),
-            'cc'              => static::normalizeIdentity($message->getCc()),
-            'bcc'             => static::normalizeIdentity($message->getBcc()),
-            'replyTo'         => static::normalizeIdentity($message->getReplyTo()),
-            'fromRendered'    => IdentityUtils::buildIdentityString($message->getFrom()),
-            'toRendered'      => IdentityUtils::buildIdentityString($message->getTo()),
-            'ccRendered'      => IdentityUtils::buildIdentityString($message->getCc()),
-            'bccRendered'     => IdentityUtils::buildIdentityString($message->getBcc()),
+            'from' => static::normalizeIdentity($message->getFrom()),
+            'to' => static::normalizeIdentity($message->getTo()),
+            'cc' => static::normalizeIdentity($message->getCc()),
+            'bcc' => static::normalizeIdentity($message->getBcc()),
+            'replyTo' => static::normalizeIdentity($message->getReplyTo()),
+            'fromRendered' => IdentityUtils::buildIdentityString($message->getFrom()),
+            'toRendered' => IdentityUtils::buildIdentityString($message->getTo()),
+            'ccRendered' => IdentityUtils::buildIdentityString($message->getCc()),
+            'bccRendered' => IdentityUtils::buildIdentityString($message->getBcc()),
             'replyToRendered' => IdentityUtils::buildIdentityString($message->getReplyTo()),
-            'subject'         => $message->getSubject(),
-            'headers'         => $message->getHeaders(),
-            'html'            => $message->getHtml(),
-            'text'            => $message->getText(),
-            'base64_html'     => base64_encode($message->getHtml()),
+            'subject' => $message->getSubject(),
+            'headers' => $message->getHeaders(),
+            'html' => $message->getHtml(),
+            'text' => $message->getText(),
+            'base64_html' => base64_encode($message->getHtml()),
         ];
 
         if ($message instanceof TaggableInterface) {
@@ -89,7 +89,7 @@ class StampieDataCollector extends DataCollector
         if ($identity instanceof IdentityInterface) {
             return [
                 'email' => $identity->getEmail(),
-                'name'  => $identity->getName(),
+                'name' => $identity->getName(),
             ];
         }
 

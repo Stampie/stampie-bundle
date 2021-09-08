@@ -19,7 +19,7 @@ class BundleInitializationTest extends BaseBundleTestCase
         $kernel->addConfigFile(__DIR__.'/config.yml');
 
         // Boot the kernel.
-        $this->bootKernel();
+        $kernel->boot();
 
         // Get the container
         $container = $this->getContainer();
