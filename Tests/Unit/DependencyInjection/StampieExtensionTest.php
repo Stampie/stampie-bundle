@@ -27,8 +27,8 @@ class StampieExtensionTest extends TestCase
 
         $this->extension->load([
             'stampie' => [
-                'http_client'  => 'my.http_client',
-                'mailer'       => 'postmark',
+                'http_client' => 'my.http_client',
+                'mailer' => 'postmark',
                 'server_token' => 'token',
             ],
         ], $container);
@@ -45,7 +45,7 @@ class StampieExtensionTest extends TestCase
     {
         $this->extension->load([
             'stampie' => [
-                'mailer'       => 'DummyMailer',
+                'mailer' => 'DummyMailer',
                 'server_token' => 'token',
             ],
         ], $this->createContainerBuilder());
@@ -57,9 +57,9 @@ class StampieExtensionTest extends TestCase
 
         $this->extension->load([
             'stampie' => [
-                'mailer'       => 'postmark',
+                'mailer' => 'postmark',
                 'server_token' => 'token',
-                'extra'        => false,
+                'extra' => false,
             ],
         ], $builder);
 
@@ -88,9 +88,9 @@ class StampieExtensionTest extends TestCase
 
         $this->extension->load([
             'stampie' => [
-                'mailer'       => 'postmark',
+                'mailer' => 'postmark',
                 'server_token' => 'token',
-                'extra'        => [
+                'extra' => [
                     'logging' => true,
                 ],
             ],
@@ -103,7 +103,7 @@ class StampieExtensionTest extends TestCase
     protected function createContainerBuilder($kernelDebug = false, $kernelBundles = [])
     {
         return new ContainerBuilder(new ParameterBag([
-            'kernel.debug'   => $kernelDebug,
+            'kernel.debug' => $kernelDebug,
             'kernel.bundles' => $kernelBundles,
         ]));
     }
