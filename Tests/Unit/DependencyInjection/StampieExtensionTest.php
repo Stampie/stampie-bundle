@@ -62,11 +62,7 @@ class StampieExtensionTest extends TestCase
         ], $builder);
 
         $this->assertTrue($builder->hasDefinition('stampie.mailer'));
-        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
-            $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('stampie.mailer'));
-        } else {
-            $this->assertInstanceOf('Symfony\Component\DependencyInjection\DefinitionDecorator', $builder->getDefinition('stampie.mailer'));
-        }
+        $this->assertInstanceOf('Symfony\Component\DependencyInjection\ChildDefinition', $builder->getDefinition('stampie.mailer'));
         $this->assertEquals('stampie.mailer.postmark', $builder->getDefinition('stampie.mailer')->getParent());
 
         $this->assertEquals([
