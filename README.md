@@ -1,6 +1,6 @@
 # StampieBundle
 
-[![Build Status](https://travis-ci.org/Stampie/stampie-bundle.svg)](https://travis-ci.org/Stampie/stampie-bundle)
+[![CI](https://github.com/Stampie/stampie-bundle/actions/workflows/ci.yaml/badge.svg)](https://github.com/Stampie/stampie-bundle/actions/workflows/ci.yaml)
 
 Integrates [Stampie](https://github.com/Stampie/Stampie) with Symfony.
 
