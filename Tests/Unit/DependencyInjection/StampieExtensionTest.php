@@ -16,7 +16,7 @@ class StampieExtensionTest extends TestCase
     /** @var StampieExtension */
     private $extension;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extension = new StampieExtension();
     }
@@ -37,12 +37,10 @@ class StampieExtensionTest extends TestCase
         $this->assertEquals('my.http_client', (string) $definition->getArgument(0));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid mailer "DummyMailer" specified
-     */
     public function testExceptionWhenInvalidMailerSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid mailer "DummyMailer" specified');
         $this->extension->load([
             'stampie' => [
                 'mailer' => 'DummyMailer',
