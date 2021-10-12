@@ -9,7 +9,7 @@
         "email" : "henrik@bjrnskov.dk"
     }],
     "require": {
-        "php"                          : "^5.5 || ^7.0",
+        "php"                          : "^7.2",
         "symfony/console"              : "^2.7 || ^3.0 || ^4.0",
         "symfony/config"               : "^2.7 || ^3.0 || ^4.0",
         "symfony/dependency-injection" : "^2.7 || ^3.0 || ^4.0",
@@ -18,11 +18,11 @@
         "stampie/stampie"              : "^1.0"
     },
     "require-dev": {
-        "guzzlehttp/psr7": "^1.4",
-        "php-http/curl-client": "^1.7",
-        "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20",
+        "guzzlehttp/psr7": "^1.4 || ^2.1",
+        "php-http/curl-client": "^1.7 || ^2.2",
+        "phpunit/phpunit": "^7.5.20",
         "stampie/extra": "^1.0",
-        "symfony/phpunit-bridge": "^4.3",
+        "symfony/phpunit-bridge": "^5.3",
         "nyholm/symfony-bundle-test": "^1.3.1, != 1.8.1"
     },
     "suggest": {
