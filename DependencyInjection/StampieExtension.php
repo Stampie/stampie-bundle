@@ -15,7 +15,6 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -39,11 +38,7 @@ class StampieExtension extends Extension
             throw new \InvalidArgumentException(sprintf('Invalid mailer "%s" specified', $config['mailer']));
         }
 
-        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
-            $definition = new ChildDefinition($mailerServiceId);
-        } else {
-            $definition = new DefinitionDecorator($mailerServiceId);
-        }
+        $definition = new ChildDefinition($mailerServiceId);
 
         // get the abstract definition of an mailer and create "stampie" based on it
         $definition
